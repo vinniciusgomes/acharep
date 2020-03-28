@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Platform } from "react-native";
 
 export const Container = styled.View`
   flex: 1;
@@ -18,17 +19,19 @@ export const PageTitleContainer = styled.View`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 30px 24px 0px 24px;
+  margin: ${Platform.OS === "ios"
+    ? "30px 24px 0px 24px"
+    : "45px 24px 0px 24px"};
 `;
 
 export const Title = styled.Text`
-  font-size: 26px;
+  font-size: ${Platform.OS === "ios" ? "26px" : "23px"};
   color: #24292e;
   font-weight: bold;
 `;
 
 export const Subtitle = styled.Text`
-  font-size: 16px;
+  font-size: ${Platform.OS === "ios" ? "16px" : "13px"};
   color: #959da5;
   text-align: ${props => (props.center ? "center" : "left")};
   width: 90%;
@@ -36,16 +39,15 @@ export const Subtitle = styled.Text`
 `;
 
 export const SearchContainer = styled.View`
-  height: 150px;
+  height: auto;
   border-color: #e1e4e8;
   border-width: 1px;
-  padding: 15px;
   border-radius: 5px;
   margin: 40px 24px 40px 24px;
 `;
 
 export const Button = styled.TouchableOpacity`
-  height: 50px;
+  height: ${Platform.OS === "ios" ? "50px" : "46px"};
   background-color: #ffb323;
   border-radius: 5px;
   display: flex;
@@ -102,7 +104,8 @@ export const RepTypeItem = styled.TouchableOpacity`
 
 export const LastRepsContainer = styled.View`
   width: 100%;
-  padding: 0px 24px;
+  margin-left: 24px;
+  padding-right: 28px;
   margin-bottom: 30px;
 `;
 
@@ -114,23 +117,46 @@ export const LastRepsItemContainer = styled.View`
   flex-wrap: wrap;
 `;
 
-export const LastRepItem = styled.TouchableOpacity`
-  width: 48%;
-  margin-top: 20px;
+export const FieldContainer = styled.View`
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
 `;
 
-export const RepImage = styled.Image`
+export const FieldTitleContainer = styled.View`
   width: 100%;
-  height: 110px;
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
+  flex-direction: row;
+  align-items: center;
 `;
 
-export const RepContent = styled.View`
+export const FieldTitle = styled.Text`
+  font-size: ${Platform.OS === "android" ? "16px" : "19px"};
+  color: #24292e;
+  font-weight: 700;
+  margin-left: ${props => (props.ionicons ? "9px" : "5px")};
+  margin-bottom: ${Platform.OS === "ios" ? "5px" : 0};
+`;
+
+export const FieldSeparator = styled.View`
   width: 100%;
-  height: 110px;
-  border-color: #e1e4e8;
-  border-width: 1px;
-  border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px;
+  height: 1px;
+  background-color: #e1e4e8;
+`;
+
+export const FieldBottomContainer = styled.View`
+  width: 100%;
+  flex-direction: row;
+  align-items: center;
+`;
+
+export const FieldBottomItem = styled.View`
+  width: 47.5%;
+`;
+
+export const FieldBottomSeparator = styled.View`
+  height: 100%;
+  width: 1px;
+  background-color: #e1e4e8;
+  margin-left: 2.5%;
+  margin-right: 2.5%;
 `;
