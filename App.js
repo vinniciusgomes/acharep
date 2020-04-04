@@ -3,6 +3,8 @@ import { StatusBar } from "react-native";
 
 import Stack from "./src/router/Stack";
 
+console.disableYellowBox = true;
+
 export default function acharepi() {
   return (
     <React.Fragment>

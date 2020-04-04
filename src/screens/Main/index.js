@@ -203,7 +203,7 @@ function Main(props) {
               </FieldBottomItem>
             </FieldBottomContainer>
           </SearchContainer>
-          <Button>
+          <Button onPress={() => navigate("ListRep")}>
             <ButtonText>Encontrar</ButtonText>
           </Button>
           <RepTypeContainer>
