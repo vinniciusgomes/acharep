@@ -50,7 +50,7 @@ O AchaRep é um projeto que visa facilitar a forma de estudantes encontrarem rep
 
 ## 🔖 Layout
 
-Você pode baixar o layout do projeto no formato `.xd` através [desse link](.github/acharep.sketch).
+Você pode baixar o layout do projeto no formato `.xd` através [desse link](.github/acharep.xd).
 
 Para abrir o arquivo no formato `.xd` em qualquer sistema operacional utilize a ferramenta [Adobe XD](https://www.adobe.com/br/products/xd/details.html).
 
