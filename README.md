@@ -1,5 +1,5 @@
 <h1 align="center">
-    <img alt="AchaRep" title="Acharep" src=".github/acharep.png" width="250px" />
+    <img alt="AchaRep" title="Acharep" src=".github/acharep-logo.png" width="250px" />
 </h1>
 
 <h4 align="center">
