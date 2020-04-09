@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "AchaRepi",
-    "slug": "acharepi",
+    "name": "AchaRep",
+    "slug": "acharep",
     "privacy": "public",
     "sdkVersion": "36.0.0",
     "platforms": [
@@ -27,6 +27,6 @@
       "supportsTablet": true
     },
     "description": "Encontre e gerencie repúblicas universitárias",
-    "githubUrl": "https://github.com/vinniciusgomes/acharepi"
+    "githubUrl": "https://github.com/vinniciusgomes/acharep"
   }
 }
