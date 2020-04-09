@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { Platform } from "react-native";
 
 export const Container = styled.ScrollView`
   flex: 1;
@@ -105,9 +104,84 @@ export const PriceTotal = styled.Text`
   margin-top: 10px;
 `;
 
+export const AboutRepContainer = styled.View`
+  width: 100%;
+`;
+
 export const AboutRepTitle = styled.Text`
   font-size: 17px;
   color: #222222;
   font-weight: bold;
-  margin-top: 10px;
+  margin-top: 30px;
+  margin-bottom: 5px;
+`;
+
+export const AboutRep = styled.Text`
+  font-size: 17px;
+  color: #707070;
+  padding-top: 7px;
+  text-align: justify;
+`;
+
+export const HouseInfoContainer = styled.View`
+  width: 100%;
+  margin-top: 30px;
+  margin-bottom: 20px;
+`;
+
+export const HouseInfoItem = styled.View`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 5px;
+  width: 100%;
+`;
+
+export const HouseInfoName = styled.Text`
+  font-size: 17px;
+  color: #4f4f4f;
+  font-weight: 300;
+  margin-left: 10px;
+  margin-right: 10px;
+`;
+
+export const HouseInfoContent = styled.Text`
+  font-size: 17px;
+  color: #222222;
+  font-weight: 600;
+  width: 70%;
+`;
+
+export const HouseInfoTitle = styled.Text`
+  font-size: 17px;
+  color: #222222;
+  font-weight: bold;
+  margin-bottom: 5px;
+`;
+
+export const ContactButtonContainer = styled.View`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  margin-bottom: 30px;
+`;
+
+export const ContactButton = styled.TouchableOpacity`
+  width: 100%;
+  height: 50px;
+  background-color: #ffb323;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  border-radius: 3px;
+`;
+
+export const ButtonText = styled.Text`
+  color: #ffffff;
+  font-size: 17px;
+  font-weight: bold;
+  margin-left: 5px;
 `;

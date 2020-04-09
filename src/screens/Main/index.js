@@ -249,8 +249,8 @@ function Main(props) {
               />
               <Rep
                 image={require("../../static/reps/2.jpg")}
-                name="Pirâmides 64"
-                address="Alameda Santos 2491, Jardins, São Paulo"
+                name="República 365"
+                address="Nova Iguaçú 91, Morumbi, São Paulo"
                 type="Apartamento"
                 vacancies="3 de 7 pessoas"
                 gender="Feminina"
