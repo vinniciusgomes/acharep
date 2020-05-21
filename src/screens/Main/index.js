@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { StatusBar, Platform, View, RefreshControl } from "react-native";
 import { MaterialIcons, Ionicons } from "@expo/vector-icons";
 import RNPickerSelect from "react-native-picker-select";
@@ -27,28 +27,43 @@ import {
   FieldSeparator,
   FieldBottomContainer,
   FieldBottomItem,
-  FieldBottomSeparator
+  FieldBottomSeparator,
 } from "./styles";
 import Loading from "../../components/loading";
 import Rep from "../../components/Main/Rep";
+import api from "../../services/api";
 
 function wait(timeout) {
-  return new Promise(resolve => {
+  return new Promise((resolve) => {
     setTimeout(resolve, timeout);
   });
 }
 
 function Main(props) {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [reps, setReps] = useState([]);
   const navigate = props.navigation.navigate;
-
   const [refreshing, setRefreshing] = React.useState(false);
 
   const onRefresh = React.useCallback(() => {
-    setRefreshing(true);
-
-    wait(2000).then(() => setRefreshing(false));
+    setLoading(true);
+    requestReps();
   }, [refreshing]);
+
+  useEffect(() => {
+    requestReps();
+  }, []);
+
+  function requestReps() {
+    return api
+      .get("/rep?limite=4")
+      .then((res) => {
+        const response = res.data;
+        setReps(response);
+      })
+      .catch((err) => console.log(err))
+      .finally(() => setLoading(false));
+  }
 
   return (
     <Container>
@@ -89,26 +104,26 @@ function Main(props) {
               <RNPickerSelect
                 placeholder={{
                   label: "Selecione...",
-                  value: null
+                  value: null,
                 }}
-                onValueChange={value => {}}
+                onValueChange={(value) => {}}
                 style={{
                   placeholder: {
-                    color: "#656C72"
-                  }
+                    color: "#656C72",
+                  },
                 }}
                 useNativeAndroidPickerStyle={false}
                 doneText="Selecionar"
                 items={[
                   { label: "Lorena", value: "1" },
                   { label: "Guaratinguetá", value: "2" },
-                  { label: "Cruzeiro", value: "3" }
+                  { label: "Cruzeiro", value: "3" },
                 ]}
                 Icon={() => {
                   return (
                     <View
                       style={{
-                        backgroundColor: "transparent"
+                        backgroundColor: "transparent",
                       }}
                     />
                   );
@@ -133,25 +148,25 @@ function Main(props) {
                   <RNPickerSelect
                     placeholder={{
                       label: "Selecione...",
-                      value: null
+                      value: null,
                     }}
-                    onValueChange={value => {}}
+                    onValueChange={(value) => {}}
                     style={{
                       placeholder: {
-                        color: "#656C72"
-                      }
+                        color: "#656C72",
+                      },
                     }}
                     useNativeAndroidPickerStyle={false}
                     doneText="Selecionar"
                     items={[
                       { label: "Sim", value: "yes" },
-                      { label: "Não", value: "no" }
+                      { label: "Não", value: "no" },
                     ]}
                     Icon={() => {
                       return (
                         <View
                           style={{
-                            backgroundColor: "transparent"
+                            backgroundColor: "transparent",
                           }}
                         />
                       );
@@ -174,26 +189,26 @@ function Main(props) {
                   <RNPickerSelect
                     placeholder={{
                       label: "Selecione...",
-                      value: null
+                      value: null,
                     }}
-                    onValueChange={value => {}}
+                    onValueChange={(value) => {}}
                     style={{
                       placeholder: {
-                        color: "#656C72"
-                      }
+                        color: "#656C72",
+                      },
                     }}
                     useNativeAndroidPickerStyle={false}
                     doneText="Selecionar"
                     items={[
                       { label: "De R$100 até R$500", value: "1" },
                       { label: "De R$500 até R$900", value: "2" },
-                      { label: "De R$900 até R$1.200", value: "3" }
+                      { label: "De R$900 até R$1.200", value: "3" },
                     ]}
                     Icon={() => {
                       return (
                         <View
                           style={{
-                            backgroundColor: "transparent"
+                            backgroundColor: "transparent",
                           }}
                         />
                       );
@@ -237,43 +252,34 @@ function Main(props) {
               <Subtitle>Estas são as últimas reps postadas:</Subtitle>
             </TitleContainer>
             <LastRepsItemContainer>
-              <Rep
-                image={require("../../static/reps/1.jpg")}
-                name="Pirâmides 64"
-                address="Alameda Santos 2491, Jardins, São Paulo"
-                exclusive={true}
-                type="Apartamento"
-                vacancies="3 de 7 pessoas"
-                gender="Feminina"
-                price={1.517}
-              />
-              <Rep
-                image={require("../../static/reps/2.jpg")}
-                name="República 365"
-                address="Nova Iguaçú 91, Morumbi, São Paulo"
-                type="Apartamento"
-                vacancies="3 de 7 pessoas"
-                gender="Feminina"
-                price={1.517}
-              />
-              <Rep
-                image={require("../../static/reps/3.jpg")}
-                name="Pirâmides 64"
-                address="Alameda Santos 2491, Jardins, São Paulo"
-                type="Apartamento"
-                vacancies="3 de 7 pessoas"
-                gender="Feminina"
-                price={1.517}
-              />
-              <Rep
-                image={require("../../static/reps/4.jpg")}
-                name="Pirâmides 64"
-                address="Alameda Santos 2491, Jardins, São Paulo"
-                type="Apartamento"
-                vacancies="3 de 7 pessoas"
-                gender="Feminina"
-                price={1.517}
-              />
+              {reps.map((rep) => (
+                <Rep
+                  exclusive={rep.premium}
+                  image={rep.fotos[0]}
+                  name={rep.nome}
+                  address={
+                    rep.endereco.rua +
+                    " " +
+                    rep.endereco.numero +
+                    ", " +
+                    rep.endereco.bairro +
+                    ", " +
+                    rep.endereco.uf
+                  }
+                  type={rep.tipo}
+                  vacancies={`${rep.vaga.livre} de ${rep.vaga.total} pessoas`}
+                  gender={
+                    rep.genero === "U"
+                      ? "Unisex"
+                      : rep.genero === "M"
+                      ? "Masculina"
+                      : "Feminina"
+                  }
+                  price={rep.preco}
+                  id={rep._id}
+                  navigate={navigate}
+                />
+              ))}
             </LastRepsItemContainer>
           </LastRepsContainer>
         </Content>

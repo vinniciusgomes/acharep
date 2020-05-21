@@ -38,9 +38,9 @@ export default function Rep({
 }) {
   return (
     <Container>
-      <RepItem onPress={(() => navigate("RepInfo"))}>
+      <RepItem>
         <RepImage
-          source={image}
+          source={{uri: image}}
           imageStyle={{ borderTopLeftRadius: 5, borderTopRightRadius: 5 }}
         >
           <RepImageContent exclusive={exclusive}>
