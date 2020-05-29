@@ -3,7 +3,7 @@
 </h1>
 
 <h4 align="center">
-  Reinvente seu jeito de encontrar Rep
+  Reinvente seu jeito de encontrar repúblicas
 </h4>
 <p align="center">
   <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/vinniciusgomes/acharepi">
