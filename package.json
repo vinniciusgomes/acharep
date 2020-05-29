@@ -8,6 +8,7 @@
     "eject": "expo eject"
   },
   "dependencies": {
+    "@react-native-community/async-storage": "^1.11.0",
     "axios": "^0.19.2",
     "expo": "~36.0.0",
     "react": "~16.9.0",
@@ -19,6 +20,10 @@
     "react-native-read-more-text": "^1.1.2",
     "react-native-web": "~0.11.7",
     "react-navigation": "^4.3.3",
+    "react-redux": "^7.2.0",
+    "redux": "^4.0.5",
+    "redux-logger": "^3.0.6",
+    "redux-persist": "^6.0.0",
     "styled-components": "^5.0.1"
   },
   "devDependencies": {

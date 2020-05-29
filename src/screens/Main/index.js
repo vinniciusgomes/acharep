@@ -1,7 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { StatusBar, Platform, View, RefreshControl } from "react-native";
 import { MaterialIcons, Ionicons } from "@expo/vector-icons";
 import RNPickerSelect from "react-native-picker-select";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import AsyncStorage from "@react-native-community/async-storage";
 
 import {
   Container,
@@ -32,20 +35,22 @@ import {
 import Loading from "../../components/loading";
 import Rep from "../../components/Main/Rep";
 import api from "../../services/api";
-
-function wait(timeout) {
-  return new Promise((resolve) => {
-    setTimeout(resolve, timeout);
-  });
-}
+import { Creators as FilterActions } from "../../store/ducks/filter";
 
 function Main(props) {
+  console.log(props);
   const [loading, setLoading] = useState(true);
   const [reps, setReps] = useState([]);
-  const navigate = props.navigation.navigate;
-  const [refreshing, setRefreshing] = React.useState(false);
+  const [city, setCity] = useState(null);
+  const [roomShare, setRoomShare] = useState(null);
+  const [repGender, setRepGender] = useState(null);
+  const [repType, setRepType] = useState(null);
+  const [valueRange, setValueRange] = useState(null);
+  const [refreshing, setRefreshing] = useState(false);
 
-  const onRefresh = React.useCallback(() => {
+  const navigate = props.navigation.navigate;
+
+  const onRefresh = useCallback(() => {
     setLoading(true);
     requestReps();
   }, [refreshing]);
@@ -53,6 +58,20 @@ function Main(props) {
   useEffect(() => {
     requestReps();
   }, []);
+
+  function handleNavigate() {
+    let filters = [];
+
+    if (city) filters = [...filters, city];
+    if (roomShare) filters = [...filters, roomShare];
+    if (repGender) filters = [...filters, repGender];
+    if (repType) filters = [...filters, repType];
+    if (valueRange) filters = [...filters, valueRange];
+
+    // AsyncStorage.setItem("filters", filters);
+
+    navigate("ListRep", { filters: filters });
+  }
 
   function requestReps() {
     return api
@@ -106,7 +125,9 @@ function Main(props) {
                   label: "Selecione...",
                   value: null,
                 }}
-                onValueChange={(value) => {}}
+                onValueChange={(value) => {
+                  setCity(value);
+                }}
                 style={{
                   placeholder: {
                     color: "#656C72",
@@ -150,7 +171,9 @@ function Main(props) {
                       label: "Selecione...",
                       value: null,
                     }}
-                    onValueChange={(value) => {}}
+                    onValueChange={(value) => {
+                      setRoomShare(value);
+                    }}
                     style={{
                       placeholder: {
                         color: "#656C72",
@@ -159,8 +182,8 @@ function Main(props) {
                     useNativeAndroidPickerStyle={false}
                     doneText="Selecionar"
                     items={[
-                      { label: "Sim", value: "yes" },
-                      { label: "Não", value: "no" },
+                      { label: "Sim", value: "Individual" },
+                      { label: "Não", value: "Compartilhado" },
                     ]}
                     Icon={() => {
                       return (
@@ -191,7 +214,9 @@ function Main(props) {
                       label: "Selecione...",
                       value: null,
                     }}
-                    onValueChange={(value) => {}}
+                    onValueChange={(value) => {
+                      setValueRange(value);
+                    }}
                     style={{
                       placeholder: {
                         color: "#656C72",
@@ -200,9 +225,9 @@ function Main(props) {
                     useNativeAndroidPickerStyle={false}
                     doneText="Selecionar"
                     items={[
-                      { label: "De R$100 até R$500", value: "1" },
-                      { label: "De R$500 até R$900", value: "2" },
-                      { label: "De R$900 até R$1.200", value: "3" },
+                      { label: "De R$100 até R$500", value: "100-500" },
+                      { label: "De R$500 até R$900", value: "500-900" },
+                      { label: "De R$900 até R$1.200", value: "900-1200" },
                     ]}
                     Icon={() => {
                       return (
@@ -218,7 +243,7 @@ function Main(props) {
               </FieldBottomItem>
             </FieldBottomContainer>
           </SearchContainer>
-          <Button onPress={() => navigate("ListRep")}>
+          <Button onPress={() => handleNavigate()}>
             <ButtonText>Encontrar</ButtonText>
           </Button>
           <RepTypeContainer>
@@ -230,15 +255,18 @@ function Main(props) {
               horizontal
               showsHorizontalScrollIndicator={false}
             >
-              <RepTypeItem first>
+              <RepTypeItem first onPress={() => setRepGender("Feminina")}>
                 <RepTypeIcon source={require("../../static/icons/woman.png")} />
                 <RepTypeName>Só para mulheres</RepTypeName>
               </RepTypeItem>
               <RepTypeItem>
-                <RepTypeIcon source={require("../../static/icons/house.png")} />
+                <RepTypeIcon
+                  onPress={() => setRepType("Casa")}
+                  source={require("../../static/icons/house.png")}
+                />
                 <RepTypeName>Casa</RepTypeName>
               </RepTypeItem>
-              <RepTypeItem last>
+              <RepTypeItem last onPress={() => setRepType("Apartamento")}>
                 <RepTypeIcon
                   source={require("../../static/icons/apartament.png")}
                 />
@@ -288,4 +316,11 @@ function Main(props) {
   );
 }
 
-export default Main;
+const mapStateToProps = (state) => ({
+  filter: state.filterReducer.filter,
+});
+
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators(FilterActions, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(Main);

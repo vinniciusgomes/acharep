@@ -18,10 +18,10 @@ import Rep from "../../components/RepList/Rep";
 import api from "../../services/api";
 import Loading from "../../components/loading";
 
-function ListRep(props) {
+function ListRep({ route, navigation }) {
   const [loading, setLoading] = useState(true);
   const [reps, setReps] = useState([]);
-  const navigate = props.navigation.navigate;
+  const navigate = navigation.navigate;
   const [refreshing, setRefreshing] = React.useState(false);
 
   const onRefresh = React.useCallback(() => {
@@ -43,6 +43,10 @@ function ListRep(props) {
       .catch((err) => console.log(err))
       .finally(() => setLoading(false));
   }
+
+  // const {} = props;
+  // const { filters } = route;
+  console.log(route);
 
   return (
     <Container>
