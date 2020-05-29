@@ -46,7 +46,7 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 
 ## 💻 Projeto
 
-O AchaRep é um projeto que visa facilitar a forma de estudantes encontrarem repúblicas.
+O AchaRep é um projeto que surgiu durante um trabalho de faculdade e visa facilitar a forma de estudantes encontrarem repúblicas.
 
 ## 🔖 Layout
 
