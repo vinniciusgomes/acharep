@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
-import { StatusBar, Platform, RefreshControl } from "react-native";
+import React, { useState, useEffect, useCallback } from "react";
+import { StatusBar, Platform, RefreshControl, Alert } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
-import AsyncStorage from "@react-native-community/async-storage";
+import { useSelector, useDispatch } from "react-redux";
 
 import {
   Container,
@@ -23,37 +23,48 @@ function ListRep(props) {
   const [loading, setLoading] = useState(true);
   const [reps, setReps] = useState([]);
   const navigate = props.navigation.navigate;
-  const [refreshing, setRefreshing] = React.useState(false);
+  const [refreshing, setRefreshing] = useState(false);
+  const dispatch = useDispatch();
 
-  const onRefresh = React.useCallback(() => {
-    let filters = AsyncStorage.getItem("filters");
-    const interval = setInterval(() => {
-      if (filters) {
-        clearInterval(interval);
-        requestReps(filters);
-      }
-    }, 1000);
+  const filters = useSelector((state) => state.filters, []);
+
+  const onRefresh = useCallback(() => {
+    requestReps(filters);
     setLoading(true);
   }, [refreshing]);
 
   useEffect(() => {
-    let filters = AsyncStorage.getItem("filters");
-    const interval = setInterval(() => {
-      if (filters) {
-        clearInterval(interval);
-        requestReps(filters);
-      }
-    }, 1000);
+    requestReps(filters);
   }, []);
 
+  function handleNavigate(repInfo) {
+    dispatch({ type: "REP_INFO", repInfo });
+    navigate("RepInfo");
+  }
+
   async function requestReps(filters) {
+    console.log(filters);
+    let city = true;
+    let roomShare;
+    let repGender;
+    let repType;
+    let valueRange;
+
+    if (roomShare) roomShare = roomShare;
+    if (repGender) repGender;
+    if (repType) repType;
+    if (valueRange) valueRange;
+
+    let url = `/rep`;
+
     return api
-      .get("/rep")
+      .get(url)
       .then((res) => {
         const response = res.data;
+        console.log(response);
         setReps(response);
       })
-      .catch((err) => console.log(err))
+      .catch((err) => Alert.alert("Ocorreu um erro!"))
       .finally(() => setLoading(false));
   }
 
@@ -99,12 +110,13 @@ function ListRep(props) {
                   marginLeft: -2,
                 }}
               />
-              <CityName>Lorena, São Paulo</CityName>
+              <CityName>{filters.city}</CityName>
             </CityContainer>
             <Separator />
             <RepListContainer>
               {reps.map((rep) => (
                 <Rep
+                  navigation={() => handleNavigate(rep)}
                   exclusive={rep.premium}
                   image={rep.fotos[0]}
                   name={rep.nome}

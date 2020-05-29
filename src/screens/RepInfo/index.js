@@ -3,6 +3,7 @@ import { StatusBar, Text } from "react-native";
 import { SliderBox } from "react-native-image-slider-box";
 import { MaterialIcons, FontAwesome } from "@expo/vector-icons";
 import ReadMore from "react-native-read-more-text";
+import { useSelector, useDispatch } from "react-redux";
 
 import {
   Container,
@@ -36,7 +37,7 @@ import {
 
 export default function RepInfo(props) {
   const { navigate } = props.navigation;
-
+  const repInfo = useSelector((state) => state.repInfo, []);
   const _renderTruncatedFooter = (handlePress) => {
     return (
       <Text style={{ color: "#222222", marginTop: 7 }} onPress={handlePress}>
@@ -60,7 +61,7 @@ export default function RepInfo(props) {
         ImageComponentStyle={{ height: 300 }}
         imageLoadingColor="#ffb323"
         dotColor="#ffffff"
-        images={[require("../../static/reps/1.jpg")]}
+        images={[{ uri: repInfo.fotos[0] }]}
       />
       <Header>
         <BackButton onPress={() => navigate("ListRep")}>
@@ -69,10 +70,12 @@ export default function RepInfo(props) {
       </Header>
       <Content>
         <RepNameContainer>
-          <RepName numberOfLines={1}>Pirâmides 64</RepName>
-          <Exclusive>
-            <ExclusiveText>Exclusivo</ExclusiveText>
-          </Exclusive>
+          <RepName numberOfLines={1}>{repInfo.nome}</RepName>
+          {repInfo.premium ? (
+            <Exclusive>
+              <ExclusiveText>Exclusivo</ExclusiveText>
+            </Exclusive>
+          ) : null}
         </RepNameContainer>
         <Separator />
         <RepInfoContainer>
@@ -82,7 +85,7 @@ export default function RepInfo(props) {
           <RepAddress>Alameda Santos 2491, Jardins, São Paulo</RepAddress>
           <PriceInfoContainer>
             <PriceInfoItem bold>Aluguel</PriceInfoItem>
-            <PriceInfoItem bold>R$ 1.300</PriceInfoItem>
+            <PriceInfoItem bold>R$ {repInfo.preco}</PriceInfoItem>
           </PriceInfoContainer>
           <PriceInfoContainer>
             <PriceInfoItem>Condomínio</PriceInfoItem>
@@ -107,14 +110,7 @@ export default function RepInfo(props) {
             renderRevealedFooter={_renderRevealedFooter}
           >
             <AboutRep>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam
-              auctor nunc massa, vel sagittis lorem finibus sed. Duis
-              ullamcorper justo quis pharetra fringilla. Quisque in condimentum
-              nibh. In ultricies turpis sit amet est bibendum, nec maximus enim
-              ultrices. Vivamus posuere bibendum eros vitae cursus. Donec sit
-              amet tellus dictum, porta urna quis, pharetra enim. Aenean ut
-              magna ut quam sodales porttitor ut eu ligula. Quisque varius
-              mauris non leo vestibulum porta.
+              {repInfo.historia}
             </AboutRep>
           </ReadMore>
         </AboutRepContainer>
@@ -123,7 +119,7 @@ export default function RepInfo(props) {
           <HouseInfoItem>
             <FontAwesome
               name="bed"
-              size="18"
+              size={18}
               color="#222222"
               style={{ width: 22 }}
             />
@@ -135,7 +131,7 @@ export default function RepInfo(props) {
           <HouseInfoItem>
             <FontAwesome
               name="transgender"
-              size="18"
+              size={18}
               color="#222222"
               style={{ width: 22 }}
             />
@@ -145,7 +141,7 @@ export default function RepInfo(props) {
           <HouseInfoItem>
             <FontAwesome
               name="home"
-              size="18"
+              size={18}
               color="#222222"
               style={{ width: 22 }}
             />
@@ -157,7 +153,7 @@ export default function RepInfo(props) {
           <HouseInfoItem>
             <FontAwesome
               name="wifi"
-              size="18"
+              size={18}
               color="#222222"
               style={{ width: 22 }}
             />
@@ -169,7 +165,7 @@ export default function RepInfo(props) {
           <ContactButton>
             <FontAwesome
               name="whatsapp"
-              size="20"
+              size={20}
               color="#ffffff"
               style={{ width: 22 }}
             />

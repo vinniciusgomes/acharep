@@ -1,11 +1,11 @@
 import styled from "styled-components";
 
-export const Container = styled.View`
+export const Container = styled.TouchableOpacity`
   width: 100%;
   margin-bottom: 15px;
 `;
 
-export const RepItem = styled.TouchableOpacity`
+export const RepItem = styled.View`
   width: 100%;
   margin-top: 20px;
 `;

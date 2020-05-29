@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { StatusBar, Platform, View, RefreshControl } from "react-native";
+import { StatusBar, Platform, View, RefreshControl, Alert } from "react-native";
 import { MaterialIcons, Ionicons } from "@expo/vector-icons";
 import RNPickerSelect from "react-native-picker-select";
 import AsyncStorage from "@react-native-community/async-storage";
+import { useDispatch } from "react-redux";
 
 import {
   Container,
@@ -43,6 +44,7 @@ function Main(props) {
   const [repType, setRepType] = useState(null);
   const [valueRange, setValueRange] = useState(null);
   const [refreshing, setRefreshing] = useState(false);
+  const dispatch = useDispatch();
 
   const navigate = props.navigation.navigate;
 
@@ -52,7 +54,6 @@ function Main(props) {
   }, [refreshing]);
 
   useEffect(() => {
-    AsyncStorage.clear();
     requestReps();
   }, []);
 
@@ -65,11 +66,14 @@ function Main(props) {
     if (repType) filters = { ...filters, repType };
     if (valueRange) filters = { ...filters, valueRange };
 
-    var filtersJson = JSON.stringify(filters);
+    dispatch({ type: "ADD_FILTERS", filters });
 
-    AsyncStorage.setItem("filters", filtersJson);
+    if(city) {
 
-    navigate("ListRep", { filters: filters });
+      navigate("ListRep");
+    } else {
+      Alert.alert("Selecione uma cidade!")
+    }
   }
 
   function requestReps() {
@@ -135,9 +139,10 @@ function Main(props) {
                 useNativeAndroidPickerStyle={false}
                 doneText="Selecionar"
                 items={[
-                  { label: "Lorena", value: "1" },
-                  { label: "Guaratinguetá", value: "2" },
-                  { label: "Cruzeiro", value: "3" },
+                  { label: "São Paulo", value: "São Paulo" },
+                  { label: "Lorena", value: "Lorena" },
+                  { label: "Guaratinguetá", value: "Guaratinguetá" },
+                  { label: "Cruzeiro", value: "Cruzeiro" },
                 ]}
                 Icon={() => {
                   return (

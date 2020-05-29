@@ -33,14 +33,14 @@ export default function Rep({
   vacancies,
   gender,
   price,
-  navigate,
   id,
+  navigation,
 }) {
   return (
-    <Container>
+    <Container onPress={navigation}>
       <RepItem>
         <RepImage
-          source={{uri: image}}
+          source={{ uri: image }}
           imageStyle={{ borderTopLeftRadius: 5, borderTopRightRadius: 5 }}
         >
           <RepImageContent exclusive={exclusive}>
