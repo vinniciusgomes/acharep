@@ -27,6 +27,9 @@
       "supportsTablet": true
     },
     "description": "Encontre e gerencie repúblicas universitárias",
-    "githubUrl": "https://github.com/vinniciusgomes/acharep"
-  }
+    "githubUrl": "https://github.com/vinniciusgomes/acharep",
+    "entryPoint": "node_modules/expo/AppEntry.js"
+  },
+  "displayName": "AchaRep",
+  "name": "acharep"
 }

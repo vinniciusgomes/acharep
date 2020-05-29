@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { StatusBar, Platform, RefreshControl } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
+import AsyncStorage from "@react-native-community/async-storage";
 
 import {
   Container,
@@ -18,22 +19,34 @@ import Rep from "../../components/RepList/Rep";
 import api from "../../services/api";
 import Loading from "../../components/loading";
 
-function ListRep({ route, navigation }) {
+function ListRep(props) {
   const [loading, setLoading] = useState(true);
   const [reps, setReps] = useState([]);
-  const navigate = navigation.navigate;
+  const navigate = props.navigation.navigate;
   const [refreshing, setRefreshing] = React.useState(false);
 
   const onRefresh = React.useCallback(() => {
+    let filters = AsyncStorage.getItem("filters");
+    const interval = setInterval(() => {
+      if (filters) {
+        clearInterval(interval);
+        requestReps(filters);
+      }
+    }, 1000);
     setLoading(true);
-    requestReps();
   }, [refreshing]);
 
   useEffect(() => {
-    requestReps();
+    let filters = AsyncStorage.getItem("filters");
+    const interval = setInterval(() => {
+      if (filters) {
+        clearInterval(interval);
+        requestReps(filters);
+      }
+    }, 1000);
   }, []);
 
-  function requestReps() {
+  async function requestReps(filters) {
     return api
       .get("/rep")
       .then((res) => {
@@ -43,10 +56,6 @@ function ListRep({ route, navigation }) {
       .catch((err) => console.log(err))
       .finally(() => setLoading(false));
   }
-
-  // const {} = props;
-  // const { filters } = route;
-  console.log(route);
 
   return (
     <Container>

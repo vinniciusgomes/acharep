@@ -2,8 +2,6 @@ import React, { useState, useEffect, useCallback } from "react";
 import { StatusBar, Platform, View, RefreshControl } from "react-native";
 import { MaterialIcons, Ionicons } from "@expo/vector-icons";
 import RNPickerSelect from "react-native-picker-select";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
 import AsyncStorage from "@react-native-community/async-storage";
 
 import {
@@ -35,10 +33,8 @@ import {
 import Loading from "../../components/loading";
 import Rep from "../../components/Main/Rep";
 import api from "../../services/api";
-import { Creators as FilterActions } from "../../store/ducks/filter";
 
 function Main(props) {
-  console.log(props);
   const [loading, setLoading] = useState(true);
   const [reps, setReps] = useState([]);
   const [city, setCity] = useState(null);
@@ -56,19 +52,22 @@ function Main(props) {
   }, [refreshing]);
 
   useEffect(() => {
+    AsyncStorage.clear();
     requestReps();
   }, []);
 
   function handleNavigate() {
-    let filters = [];
+    let filters = {};
 
-    if (city) filters = [...filters, city];
-    if (roomShare) filters = [...filters, roomShare];
-    if (repGender) filters = [...filters, repGender];
-    if (repType) filters = [...filters, repType];
-    if (valueRange) filters = [...filters, valueRange];
+    if (city) filters = { ...filters, city };
+    if (roomShare) filters = { ...filters, roomShare };
+    if (repGender) filters = { ...filters, repGender };
+    if (repType) filters = { ...filters, repType };
+    if (valueRange) filters = { ...filters, valueRange };
 
-    // AsyncStorage.setItem("filters", filters);
+    var filtersJson = JSON.stringify(filters);
+
+    AsyncStorage.setItem("filters", filtersJson);
 
     navigate("ListRep", { filters: filters });
   }
@@ -316,11 +315,4 @@ function Main(props) {
   );
 }
 
-const mapStateToProps = (state) => ({
-  filter: state.filterReducer.filter,
-});
-
-const mapDispatchToProps = (dispatch) =>
-  bindActionCreators(FilterActions, dispatch);
-
-export default connect(mapStateToProps, mapDispatchToProps)(Main);
+export default Main;
