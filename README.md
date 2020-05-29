@@ -6,16 +6,16 @@
   Reinvente seu jeito de encontrar repúblicas
 </h4>
 <p align="center">
-  <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/vinniciusgomes/acharepi">
+  <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/vinniciusgomes/acharep">
 
-  <img alt="Repository size" src="https://img.shields.io/github/repo-size/vinniciusgomes/acharepi">
+  <img alt="Repository size" src="https://img.shields.io/github/repo-size/vinniciusgomes/acharep">
   
-  <a href="https://github.com/Rocketseat/semana-omnistack-10/commits/master">
-    <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/vinniciusgomes/acharepi">
+  <a href="https://github.com/vinniciusgomes/acharep/commits/master">
+    <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/vinniciusgomes/acharep">
   </a>
 
-  <a href="https://github.com/Rocketseat/semana-omnistack-10/issues">
-    <img alt="Repository issues" src="https://img.shields.io/github/issues/vinniciusgomes/acharepi">
+  <a href="https://github.com/vinniciusgomes/acharep/issues">
+    <img alt="Repository issues" src="https://img.shields.io/github/issues/vinniciusgomes/acharep">
   </a>
 
   <img alt="License" src="https://img.shields.io/badge/license-MIT-brightgreen">
