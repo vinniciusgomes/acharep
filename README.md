@@ -37,6 +37,9 @@
 <p align="center">
   <img alt="Frontend" src=".github/ios.png" width="100%">
 </p>
+<p align="center">
+  <img alt="Frontend" src=".github/android.png" width="100%">
+</p>
 
 ## :rocket: Tecnologias
 
