@@ -68,11 +68,10 @@ function Main(props) {
 
     dispatch({ type: "ADD_FILTERS", filters });
 
-    if(city) {
-
-      navigate("ListRep");
+    navigate("ListRep");
+    if (city) {
     } else {
-      Alert.alert("Selecione uma cidade!")
+      Alert.alert("Selecione uma cidade!");
     }
   }
 

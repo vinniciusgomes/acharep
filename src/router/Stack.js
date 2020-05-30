@@ -17,7 +17,7 @@ const AppNavigator = createSwitchNavigator(
     }
   },
   {
-    initialRouteName: "Main",
+    initialRouteName: "ListRep",
   }
 );
 
