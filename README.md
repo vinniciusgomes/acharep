@@ -34,6 +34,12 @@
 <p align="center">
   <img alt="Frontend" src=".github/acharep.png" width="100%">
 </p>
+<p align="center">
+  <img alt="Frontend" src=".github/ios.png" width="100%">
+</p>
+<p align="center">
+  <img alt="Frontend" src=".github/android.png" width="100%">
+</p>
 
 ## :rocket: Tecnologias
 
@@ -47,7 +53,11 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 
 ## 💻 Projeto
 
-O AchaRep é um projeto que surgiu durante um trabalho de faculdade e visa facilitar a forma de estudantes encontrarem repúblicas.
+##### O Problema: 
+Atualmente, existem dois métodos populares para procurar repúblicas, que são os conselhos de repúblicas e grupos de facebook, mas, os universitários de outras cidades e estados que necessitam de uma moradia no local do seu centro acadêmico, acabam não tendo conhecimento de tais canais de comunicação, sendo assim, acabam tendo uma grande dificuldade de conseguir uma república.
+
+##### Solução:
+O AchaRep é um projeto que visa criar um buscador de repúblicas em um único lugar, onde você consegue encontrar a rep perfeita perto da sua universidade.
 
 ## 🔖 Layout
 
@@ -70,4 +80,4 @@ Esse projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE.md) para
 
 ---
 
-Feito com ♥ by Vinnicius Gomes
+##### Feito com ♥ by Vinnicius Gomes
