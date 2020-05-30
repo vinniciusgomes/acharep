@@ -34,6 +34,15 @@
 <p align="center">
   <img alt="Frontend" src=".github/acharep.png" width="100%">
 </p>
+<p align="center">
+  <img alt="Frontend" src=".github/print-1.png" width="30%">
+</p>
+<p align="center">
+  <img alt="Frontend" src=".github/print-2.png" width="30%">
+</p>
+<p align="center">
+  <img alt="Frontend" src=".github/print-3.png" width="30%">
+</p>
 
 ## :rocket: Tecnologias
 
