@@ -63,7 +63,7 @@ O AchaRep é um projeto que visa criar um buscador de repúblicas em um único l
 
 ## 🔖 Layout
 
-Você pode baixar o layout do projeto no formato `.xd` através [desse link](.github/acharep.xd).
+Você pode baixar o layout do projeto no formato `.xd` através [desse link](https://xd.adobe.com/view/beef8f2a-4dcb-41b6-4032-0b8c0e0ba2d2-c8de/).
 
 Para abrir o arquivo no formato `.xd` em qualquer sistema operacional utilize a ferramenta [Adobe XD](https://www.adobe.com/br/products/xd/details.html).
 
